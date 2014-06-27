@@ -25,7 +25,8 @@ public class TableInfoPanel extends JTabbedPane {
 	private JTextField tableNameTf;
 	private JTextField tableCodeTf;
 	private JTextArea commentTa;
-	TableModel tm;
+	private TableModel tm;
+	private BeanConvertorPanel beanConvertorPanel;
 
 	public TableInfoPanel() {
 		this.setBackground(new Color(0x000000));
@@ -51,9 +52,12 @@ public class TableInfoPanel extends JTabbedPane {
 		commentPanel.add(commentTa);
 		tableBase.add(commentPanel, BorderLayout.SOUTH);
 
+		beanConvertorPanel=new BeanConvertorPanel();
+
 		this.addTab("Table", tableBase);
 		this.addTab("SQL", sqlTextArea);
-		
+		this.addTab("Entity Code", beanConvertorPanel);
+
 		initEvents();
 	}
 
@@ -85,6 +89,9 @@ public class TableInfoPanel extends JTabbedPane {
 		CreateTableDDLGenerator g = new CreateTableDDLGenerator();
 		this.sqlTextArea.setText(g.convert(tm));
 		modelTable.showModel(tm);
+		
+		beanConvertorPanel.setTableModel(tm);
+		beanConvertorPanel.clean();
 	}
 
 }
