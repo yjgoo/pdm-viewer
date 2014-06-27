@@ -64,6 +64,7 @@ public class PDMFileModel {
 					col.setModifier(c.elementText("Modifier"));
 					col.setDataType(c.elementText("DataType"));
 					col.setLength(c.elementText("Length"));
+					col.setComment(c.elementText("Comment"));
 					tm.addColumn(col);
 				}
 			}
